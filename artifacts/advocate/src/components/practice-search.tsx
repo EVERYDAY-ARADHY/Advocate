@@ -8,6 +8,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { practiceAreas, searchPracticeAreas } from "@/data/practice-areas";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 interface PracticeSearchProps {
   open: boolean;
@@ -40,17 +41,15 @@ export function PracticeSearch({ open, onOpenChange }: PracticeSearchProps) {
   const scrollToArea = (areaId: string) => {
     onOpenChange(false);
     setTimeout(() => {
-      const el = document.querySelector(`[data-area-id="${areaId}"]`);
       const section = document.getElementById("practice-areas");
-      if (section) {
-        const offset = 80;
-        const top =
-          section.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top, behavior: "smooth" });
-      }
+      if (section) smoothScrollTo(section, -80);
       setTimeout(() => {
-        if (el && "click" in el) (el as HTMLElement).click();
-      }, 600);
+        const el = document.querySelector(`[data-area-id="${areaId}"]`);
+        if (el && "click" in el) {
+          const isOpen = (el as HTMLElement).getAttribute("aria-expanded") === "true";
+          if (!isOpen) (el as HTMLElement).click();
+        }
+      }, 900);
     }, 150);
   };
 
@@ -130,14 +129,7 @@ export function PracticeSearch({ open, onOpenChange }: PracticeSearchProps) {
                 onClick={() => {
                   onOpenChange(false);
                   setTimeout(() => {
-                    const el = document.getElementById("contact");
-                    if (el) {
-                      const offset = 80;
-                      const top =
-                        el.getBoundingClientRect().top + window.scrollY -
-                        offset;
-                      window.scrollTo({ top, behavior: "smooth" });
-                    }
+                    smoothScrollTo("#contact", -80);
                   }, 150);
                 }}
                 className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
