@@ -14,3 +14,67 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * @summary Submit a consultation request
+ */
+export const createConsultationBodyFullNameMin = 2;
+export const createConsultationBodyFullNameMax = 120;
+
+export const createConsultationBodyPhoneMin = 7;
+export const createConsultationBodyPhoneMax = 40;
+
+export const createConsultationBodyEmailMax = 200;
+
+export const createConsultationBodyCityMax = 120;
+
+export const createConsultationBodyPracticeAreaMax = 80;
+
+export const createConsultationBodyMatterMin = 10;
+export const createConsultationBodyMatterMax = 4000;
+
+export const CreateConsultationBody = zod.object({
+  fullName: zod
+    .string()
+    .min(createConsultationBodyFullNameMin)
+    .max(createConsultationBodyFullNameMax),
+  phone: zod
+    .string()
+    .min(createConsultationBodyPhoneMin)
+    .max(createConsultationBodyPhoneMax),
+  email: zod.string().max(createConsultationBodyEmailMax).optional(),
+  city: zod.string().max(createConsultationBodyCityMax).optional(),
+  practiceArea: zod
+    .string()
+    .max(createConsultationBodyPracticeAreaMax)
+    .optional(),
+  matter: zod
+    .string()
+    .min(createConsultationBodyMatterMin)
+    .max(createConsultationBodyMatterMax),
+  preferredContact: zod.enum(["phone", "whatsapp", "email"]).optional(),
+});
+
+/**
+ * @summary List consultation requests (admin)
+ */
+export const ListConsultationsHeader = zod.object({
+  "x-admin-token": zod.string(),
+});
+
+export const ListConsultationsResponse = zod.object({
+  items: zod.array(
+    zod.object({
+      id: zod.number(),
+      fullName: zod.string(),
+      phone: zod.string(),
+      email: zod.string().nullish(),
+      city: zod.string().nullish(),
+      practiceArea: zod.string().nullish(),
+      matter: zod.string(),
+      preferredContact: zod.string().nullish(),
+      status: zod.string(),
+      createdAt: zod.coerce.date(),
+    }),
+  ),
+});

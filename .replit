@@ -1,4 +1,4 @@
-modules = ["nodejs-24"]
+modules = ["nodejs-24", "postgresql-16"]
 
 [deployment]
 router = "application"
@@ -37,3 +37,8 @@ externalPort = 3000
 [[ports]]
 localPort = 24470
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+ADVOCATE_ADMIN_TOKEN = "ba73b7d5ded71f07f0ae2b3529222ec908d4cc75"

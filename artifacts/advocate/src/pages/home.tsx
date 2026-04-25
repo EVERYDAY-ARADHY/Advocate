@@ -5,6 +5,7 @@ import { Scale, BookOpen, Landmark, Briefcase, ChevronRight, Phone, Mail, Plus, 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { practiceAreas } from "@/data/practice-areas";
+import { ConsultationForm } from "@/components/consultation-form";
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const ref = useRef(null);
@@ -306,28 +307,39 @@ export default function Home() {
                 <p className="text-background/80 text-lg">If you would like to discuss your matter, please reach out. I take consultations in person at my chambers in Delhi as well as over phone and video — by appointment.</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 mb-12">
                 <a 
                   href="tel:+917827716643" 
-                  className="flex flex-col items-center justify-center p-10 border border-background/20 hover:bg-background/5 hover:border-secondary transition-all duration-300 group"
+                  className="flex flex-col items-center justify-center p-8 border border-background/20 hover:bg-background/5 hover:border-secondary transition-all duration-300 group"
                 >
-                  <div className="w-16 h-16 rounded-full bg-background/10 flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-primary transition-colors">
-                    <Phone size={24} />
+                  <div className="w-14 h-14 rounded-full bg-background/10 flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-primary transition-colors">
+                    <Phone size={22} />
                   </div>
-                  <h3 className="text-xl font-bold tracking-widest uppercase mb-2">Phone</h3>
-                  <p className="text-background/80 text-lg group-hover:text-secondary transition-colors">+91 78277 16643</p>
+                  <h3 className="text-sm font-bold tracking-widest uppercase mb-1">Phone</h3>
+                  <p className="text-background/80 group-hover:text-secondary transition-colors">+91 78277 16643</p>
                 </a>
 
                 <a 
                   href="mailto:anilshukla.clc@gmail.com" 
-                  className="flex flex-col items-center justify-center p-10 border border-background/20 hover:bg-background/5 hover:border-secondary transition-all duration-300 group"
+                  className="flex flex-col items-center justify-center p-8 border border-background/20 hover:bg-background/5 hover:border-secondary transition-all duration-300 group"
                 >
-                  <div className="w-16 h-16 rounded-full bg-background/10 flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-primary transition-colors">
-                    <Mail size={24} />
+                  <div className="w-14 h-14 rounded-full bg-background/10 flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-primary transition-colors">
+                    <Mail size={22} />
                   </div>
-                  <h3 className="text-xl font-bold tracking-widest uppercase mb-2">Email</h3>
-                  <p className="text-background/80 text-lg group-hover:text-secondary transition-colors truncate w-full text-center">anilshukla.clc@gmail.com</p>
+                  <h3 className="text-sm font-bold tracking-widest uppercase mb-1">Email</h3>
+                  <p className="text-background/80 group-hover:text-secondary transition-colors truncate w-full text-center">anilshukla.clc@gmail.com</p>
                 </a>
+              </div>
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-px flex-1 bg-background/15" />
+                  <span className="text-xs tracking-widest uppercase text-background/60">
+                    Or request a callback
+                  </span>
+                  <div className="h-px flex-1 bg-background/15" />
+                </div>
+                <ConsultationForm />
               </div>
             </FadeIn>
           </div>

@@ -6,4 +6,10 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./consultation";
+export * from "./consultationsList";
+export * from "./createConsultationInput";
+export * from "./createConsultationInputPreferredContact";
+export * from "./createConsultationResponse";
+export * from "./errorResponse";
 export * from "./healthStatus";

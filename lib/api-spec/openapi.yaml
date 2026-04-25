@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: consultations
+    description: Consultation requests
 paths:
   /healthz:
     get:
@@ -24,6 +26,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /consultations:
+    post:
+      operationId: createConsultation
+      tags: [consultations]
+      summary: Submit a consultation request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConsultationInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateConsultationResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /admin/consultations:
+    get:
+      operationId: listConsultations
+      tags: [consultations]
+      summary: List consultation requests (admin)
+      parameters:
+        - in: header
+          name: x-admin-token
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of consultation requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsultationsList"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +83,96 @@ components:
           type: string
       required:
         - status
+    CreateConsultationInput:
+      type: object
+      properties:
+        fullName:
+          type: string
+          minLength: 2
+          maxLength: 120
+        phone:
+          type: string
+          minLength: 7
+          maxLength: 40
+        email:
+          type: string
+          maxLength: 200
+        city:
+          type: string
+          maxLength: 120
+        practiceArea:
+          type: string
+          maxLength: 80
+        matter:
+          type: string
+          minLength: 10
+          maxLength: 4000
+        preferredContact:
+          type: string
+          enum: [phone, whatsapp, email]
+      required:
+        - fullName
+        - phone
+        - matter
+    CreateConsultationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+      required:
+        - id
+        - message
+    Consultation:
+      type: object
+      properties:
+        id:
+          type: integer
+        fullName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        practiceArea:
+          type: string
+          nullable: true
+        matter:
+          type: string
+        preferredContact:
+          type: string
+          nullable: true
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - fullName
+        - phone
+        - matter
+        - status
+        - createdAt
+    ConsultationsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Consultation"
+      required:
+        - items
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
 
