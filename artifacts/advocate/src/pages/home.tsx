@@ -1,9 +1,10 @@
-import { useEffect } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, useAnimation, useInView, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
-import { Scale, BookOpen, Landmark, Briefcase, ChevronRight, Phone, Mail } from "lucide-react";
+import { Scale, BookOpen, Landmark, Briefcase, ChevronRight, Phone, Mail, Plus, Minus } from "lucide-react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { practiceAreas } from "@/data/practice-areas";
 
 const FadeIn = ({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) => {
   const ref = useRef(null);
@@ -23,6 +24,8 @@ const FadeIn = ({ children, delay = 0, className = "" }: { children: React.React
 };
 
 export default function Home() {
+  const [openArea, setOpenArea] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-secondary selection:text-primary">
       <Navbar />
@@ -178,28 +181,98 @@ export default function Home() {
                 <FadeIn>
                   <span className="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">Expertise</span>
                   <h2 className="text-3xl md:text-5xl font-serif text-primary mb-8 leading-tight">Practice Areas</h2>
-                  <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                    Comprehensive legal representation across civil and criminal domains. Each case is approached with meticulous research and a tailored strategy.
+                  <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                    Comprehensive legal representation across civil and criminal domains. Each matter is approached with meticulous research and a tailored strategy.
+                  </p>
+                  <p className="text-sm text-muted-foreground/80 leading-relaxed">
+                    Tap a practice area to see the matters handled within it, or use the search icon in the top bar to look up a specific keyword like <span className="text-primary font-medium">"bail"</span> or <span className="text-primary font-medium">"divorce"</span>.
                   </p>
                 </FadeIn>
               </div>
             </div>
             
             <div className="lg:col-span-7 space-y-4">
-              {[
-                "Criminal Law",
-                "Civil Litigation",
-                "Matrimonial & Divorce",
-                "Wills & Succession",
-                "General Litigation"
-              ].map((area, i) => (
-                <FadeIn key={i} delay={0.1 * i}>
-                  <div className="group p-8 border border-border hover:border-primary transition-all duration-300 bg-card hover:shadow-lg flex items-center justify-between cursor-default">
-                    <h3 className="text-2xl font-serif text-primary group-hover:text-secondary transition-colors">{area}</h3>
-                    <ChevronRight className="text-border group-hover:text-secondary transition-colors" />
-                  </div>
-                </FadeIn>
-              ))}
+              {practiceAreas.map((area, i) => {
+                const isOpen = openArea === area.id;
+                return (
+                  <FadeIn key={area.id} delay={0.05 * i}>
+                    <div
+                      className={`border bg-card transition-all duration-300 ${
+                        isOpen
+                          ? "border-primary shadow-lg"
+                          : "border-border hover:border-primary/40"
+                      }`}
+                    >
+                      <button
+                        type="button"
+                        data-area-id={area.id}
+                        onClick={() => setOpenArea(isOpen ? null : area.id)}
+                        aria-expanded={isOpen}
+                        className="w-full p-6 md:p-8 flex items-center justify-between text-left group cursor-pointer"
+                      >
+                        <div className="min-w-0 pr-4">
+                          <h3 className={`text-xl md:text-2xl font-serif transition-colors ${isOpen ? "text-secondary" : "text-primary group-hover:text-secondary"}`}>
+                            {area.name}
+                          </h3>
+                          <p className="text-xs tracking-widest uppercase text-muted-foreground mt-2">
+                            {area.services.length} matters handled
+                          </p>
+                        </div>
+                        <span
+                          className={`shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-colors ${
+                            isOpen
+                              ? "border-secondary text-secondary bg-secondary/5"
+                              : "border-border text-muted-foreground group-hover:border-secondary group-hover:text-secondary"
+                          }`}
+                        >
+                          {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                        </span>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            key="content"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-6 md:px-8 pb-8 pt-2 border-t border-border">
+                              <p className="text-muted-foreground italic mb-6 leading-relaxed">
+                                {area.blurb}
+                              </p>
+                              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+                                {area.services.map((service) => (
+                                  <li
+                                    key={service}
+                                    className="flex items-start gap-3 text-sm text-primary/90"
+                                  >
+                                    <span className="mt-2 w-1 h-1 rounded-full bg-secondary shrink-0" />
+                                    <span>{service}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="mt-8 pt-6 border-t border-border/60 flex items-center justify-between flex-wrap gap-3">
+                                <p className="text-xs text-muted-foreground">
+                                  Don't see your matter? Many allied issues are still handled.
+                                </p>
+                                <a
+                                  href="#contact"
+                                  className="text-xs font-bold tracking-widest uppercase text-secondary hover:text-primary transition-colors flex items-center gap-1"
+                                >
+                                  Discuss Your Matter <ChevronRight size={14} />
+                                </a>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </FadeIn>
+                );
+              })}
             </div>
           </div>
         </div>
