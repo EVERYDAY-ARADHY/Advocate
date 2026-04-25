@@ -8,7 +8,7 @@ export function Footer() {
           <div className="md:col-span-5">
             <h2 className="text-3xl font-serif mb-6 text-background">Anil Shukla</h2>
             <p className="text-primary-foreground/70 max-w-sm font-sans text-sm leading-relaxed mb-8">
-              Advocate practicing before the Supreme Court of India, Delhi High Court, and District Courts of Delhi. Over 12 years of dedicated legal practice.
+              Advocate practicing before the Supreme Court of India, Delhi High Court, Tis Hazari Court, and the District Courts of Delhi. Over 12 years of dedicated legal practice.
             </p>
           </div>
           
@@ -17,7 +17,7 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-primary-foreground/80">
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-secondary shrink-0" />
-                <a href="tel:+91782771663" className="hover:text-background transition-colors">+91 78277 1663</a>
+                <a href="tel:+917827716643" className="hover:text-background transition-colors">+91 78277 16643</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={16} className="text-secondary shrink-0" />

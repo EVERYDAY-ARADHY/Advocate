@@ -66,7 +66,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-lg md:text-xl text-background/80 max-w-2xl font-light leading-relaxed mb-12"
             >
-              Representing clients with distinction before the Supreme Court of India, Delhi High Court, and District Courts for over 12 years.
+              Representing clients with distinction before the Supreme Court of India, the Delhi High Court, Tis Hazari Court, and the District Courts of Delhi for over 12 years.
             </motion.p>
             
             <motion.div 
@@ -99,10 +99,10 @@ export default function Home() {
               <FadeIn delay={0.2}>
                 <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
                   <p>
-                    Anil Shukla is an Advocate based in Delhi, bringing over a decade of rigorous legal experience to every matter. His practice is defined by a commitment to thorough preparation, strategic foresight, and unwavering advocacy for his clients.
+                    I am an Advocate based in Delhi, and I have spent the last twelve years building a practice on the foundations of thorough preparation, strategic foresight, and unwavering advocacy for the people who place their trust in me.
                   </p>
                   <p>
-                    An alumnus of the prestigious Campus Law Centre (CLC), Faculty of Law at the University of Delhi, he approaches the law not merely as a profession, but as a calling. His counsel is sought for matters requiring deep analytical insight and nuanced understanding of Indian jurisprudence.
+                    I read law at the Campus Law Centre (CLC), Faculty of Law, University of Delhi, and I approach this profession not as a job, but as a calling. Whether the matter is a complex constitutional question or a quiet family dispute, I bring the same care, the same diligence, and the same respect for the client sitting across from me.
                   </p>
                 </div>
               </FadeIn>
@@ -151,7 +151,7 @@ export default function Home() {
             {[
               { title: "Supreme Court of India", desc: "Appellate jurisdiction and constitutional matters before the apex court.", icon: <Scale size={32} /> },
               { title: "Delhi High Court", desc: "Writ petitions, appeals, and original side civil jurisdiction.", icon: <Landmark size={32} /> },
-              { title: "District Courts of Delhi", desc: "Trials, bail matters, and original civil suits across all district courts.", icon: <Briefcase size={32} /> }
+              { title: "Tis Hazari & District Courts", desc: "Regular practice at Tis Hazari Court and across all District Courts of Delhi — trials, bail, and original civil suits.", icon: <Briefcase size={32} /> }
             ].map((court, i) => (
               <FadeIn key={i} delay={0.2 + (i * 0.1)} className="group cursor-default">
                 <div className="border border-background/20 p-10 h-full hover:border-secondary transition-colors duration-500 bg-background/5">
@@ -215,7 +215,7 @@ export default function Home() {
             <BookOpen className="text-secondary mb-8" size={40} />
             <h2 className="text-3xl md:text-4xl font-serif text-primary mb-6">Commitment to Justice</h2>
             <p className="text-xl text-muted-foreground leading-relaxed font-light italic border-l-4 border-secondary pl-6">
-              "Justice must not be a privilege of the few, but a right accessible to all. Anil Shukla takes on pro bono matters to ensure that deserving causes are not silenced by lack of resources."
+              "Justice must not be a privilege of the few, but a right within reach of all. I take on pro bono matters because no deserving cause should go unheard for want of means."
             </p>
           </FadeIn>
         </div>
@@ -229,20 +229,20 @@ export default function Home() {
             
             <FadeIn>
               <div className="text-center mb-16 relative z-10">
-                <h2 className="text-3xl md:text-5xl font-serif mb-6">Request a Consultation</h2>
-                <p className="text-background/80 text-lg">Chambers are located in Delhi, India. In-person and virtual consultations available by appointment.</p>
+                <h2 className="text-3xl md:text-5xl font-serif mb-6">Get in touch</h2>
+                <p className="text-background/80 text-lg">If you would like to discuss your matter, please reach out. I take consultations in person at my chambers in Delhi as well as over phone and video — by appointment.</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
                 <a 
-                  href="tel:+91782771663" 
+                  href="tel:+917827716643" 
                   className="flex flex-col items-center justify-center p-10 border border-background/20 hover:bg-background/5 hover:border-secondary transition-all duration-300 group"
                 >
                   <div className="w-16 h-16 rounded-full bg-background/10 flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-primary transition-colors">
                     <Phone size={24} />
                   </div>
                   <h3 className="text-xl font-bold tracking-widest uppercase mb-2">Phone</h3>
-                  <p className="text-background/80 text-lg group-hover:text-secondary transition-colors">+91 78277 1663</p>
+                  <p className="text-background/80 text-lg group-hover:text-secondary transition-colors">+91 78277 16643</p>
                 </a>
 
                 <a 
