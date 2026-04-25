@@ -25,3 +25,10 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## Artifacts
+
+- `artifacts/habits` (web, `/`) — Daily Habits tracker.
+- `artifacts/advocate` (web, `/advocate/`) — Professional single-page website for Anil Shukla, Advocate (Delhi). React + Vite, framer-motion, no backend.
+- `artifacts/api-server` (api, `/api`) — Shared Express API server.
+- `artifacts/mockup-sandbox` (design, `/__mockup`) — Canvas mockup sandbox.
