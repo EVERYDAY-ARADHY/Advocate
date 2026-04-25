@@ -126,12 +126,13 @@ export default function Home() {
             <FadeIn delay={0.3} className="relative">
               <div className="aspect-[3/4] relative bg-muted max-w-md mx-auto overflow-hidden">
                 <img 
-                  src={`${import.meta.env.BASE_URL}images/portrait-placeholder.png`} 
-                  alt="Anil Shukla Monogram" 
-                  className="w-full h-full object-cover"
+                  src={`${import.meta.env.BASE_URL}images/anil-shukla.jpeg`} 
+                  alt="Anil Shukla, Advocate, before the Supreme Court of India" 
+                  className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute bottom-4 right-4 text-[10px] uppercase tracking-widest bg-background/80 backdrop-blur px-2 py-1 text-primary">
-                  Portrait Placeholder
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-4 left-4 right-4 text-[10px] uppercase tracking-widest text-background/90">
+                  Supreme Court of India
                 </div>
               </div>
               <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-secondary/20 -z-10" />
