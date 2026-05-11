@@ -28,7 +28,6 @@ See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and pa
 
 ## Artifacts
 
-- `artifacts/habits` (web, `/`) — Daily Habits tracker.
-- `artifacts/advocate` (web, `/advocate/`) — Professional single-page website for Anil Shukla, Advocate (Delhi). React + Vite, framer-motion, no backend.
+- `artifacts/advocate` (web, `/advocate/`) — Professional single-page website for Anil Shukla, Advocate (Delhi). React + Vite, framer-motion, consultation form with Postgres backend.
 - `artifacts/api-server` (api, `/api`) — Shared Express API server.
 - `artifacts/mockup-sandbox` (design, `/__mockup`) — Canvas mockup sandbox.
