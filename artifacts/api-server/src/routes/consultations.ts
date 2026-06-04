@@ -9,6 +9,48 @@ import { logger } from "../lib/logger";
 
 const router: IRouter = Router();
 
+async function fireWebhook(data: {
+  id: number;
+  fullName: string;
+  phone: string;
+  city?: string;
+  practiceArea?: string;
+  matter?: string;
+  preferredContact?: string;
+}) {
+  const webhookUrl = process.env.WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  try {
+    const body = JSON.stringify({
+      id: data.id,
+      name: data.fullName,
+      phone: data.phone,
+      city: data.city ?? "",
+      practice_area: data.practiceArea ?? "",
+      matter: data.matter ?? "",
+      preferred_contact: data.preferredContact ?? "",
+      submitted_at: new Date().toISOString(),
+      message: `New consultation request from ${data.fullName} (${data.phone})${data.city ? ` in ${data.city}` : ""}. Preferred contact: ${data.preferredContact ?? "phone"}.${data.matter ? ` Matter: ${data.matter}` : ""}`,
+    });
+
+    const res = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!res.ok) {
+      logger.warn({ status: res.status }, "Webhook responded with non-2xx");
+    } else {
+      logger.info({ consultationId: data.id }, "Webhook notification sent");
+    }
+  } catch (err) {
+    logger.warn({ err }, "Webhook notification failed (non-fatal)");
+  }
+}
+
 router.post("/consultations", async (req, res) => {
   const parsed = insertConsultationSchema.safeParse(req.body);
   if (!parsed.success) {
@@ -24,13 +66,17 @@ router.post("/consultations", async (req, res) => {
       .values(parsed.data)
       .returning({ id: consultationsTable.id });
 
+    const id = row?.id ?? 0;
+
     logger.info(
-      { consultationId: row?.id, name: parsed.data.fullName },
+      { consultationId: id, name: parsed.data.fullName },
       "New consultation request received",
     );
 
+    fireWebhook({ id, ...parsed.data }).catch(() => {});
+
     return res.status(201).json({
-      id: row?.id,
+      id,
       message:
         "Consultation request received. We will contact you shortly.",
     });
