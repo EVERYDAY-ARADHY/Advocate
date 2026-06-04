@@ -211,7 +211,7 @@ export function ConsultationForm() {
 
       <Field label="Preferred way to be contacted">
         <div className="flex flex-wrap gap-2">
-          {(["phone", "whatsapp", "email"] as const).map((opt) => (
+          {(["phone", "whatsapp"] as const).map((opt) => (
             <button
               key={opt}
               type="button"
