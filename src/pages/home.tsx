@@ -60,8 +60,8 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-5xl md:text-7xl lg:text-8xl font-serif text-background leading-[1.1] mb-8"
             >
-              Quiet confidence.<br />
-              <span className="text-secondary italic">Resolute counsel.</span>
+              Trusted counsel.<br />
+              <span className="text-secondary italic">Resolute action.</span>
             </motion.h1>
             
             <motion.p 
