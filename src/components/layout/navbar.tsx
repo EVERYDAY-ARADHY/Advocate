@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PracticeSearch } from "@/components/practice-search";
@@ -15,6 +15,8 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [location] = useLocation();
+  const isHome = location === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +66,7 @@ export function Navbar() {
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link
           href="/"
-          className="text-2xl font-serif font-bold tracking-tight text-primary transition-opacity hover:opacity-80"
+          className={`text-2xl font-serif font-bold tracking-tight transition-opacity hover:opacity-80 ${isHome && !isScrolled ? "text-background" : "text-primary"}`}
         >
           A<span className="text-secondary">S</span>
         </Link>
