@@ -6,14 +6,14 @@ export function Footer() {
     <footer className="bg-primary text-primary-foreground py-16 md:py-24 border-t-4 border-secondary">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <h2 className="text-3xl font-serif mb-6 text-background">Anil Shukla</h2>
             <p className="text-primary-foreground/70 max-w-sm font-sans text-sm leading-relaxed mb-8">
               Advocate practicing before the Supreme Court of India, Delhi High Court, Tis Hazari Court, and the District Courts of Delhi. Over 12 years of dedicated legal practice.
             </p>
           </div>
           
-          <div className="md:col-span-3 md:col-start-7">
+          <div className="md:col-span-3 md:col-start-6">
             <h3 className="text-sm font-bold tracking-widest uppercase text-secondary mb-6">Contact</h3>
             <ul className="space-y-4 text-sm text-primary-foreground/80">
               <li className="flex items-center gap-3">
@@ -31,7 +31,7 @@ export function Footer() {
             </ul>
           </div>
           
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <h3 className="text-sm font-bold tracking-widest uppercase text-secondary mb-6">Quick Links</h3>
             <ul className="space-y-3 text-sm text-primary-foreground/80">
               <li><Link href="/#about" className="hover:text-background transition-colors">About</Link></li>
@@ -40,11 +40,20 @@ export function Footer() {
               <li><Link href="/consultation" className="hover:text-background transition-colors text-secondary font-medium">Request Consultation</Link></li>
             </ul>
           </div>
+
+          <div className="md:col-span-2">
+            <h3 className="text-sm font-bold tracking-widest uppercase text-secondary mb-6">Legal</h3>
+            <ul className="space-y-3 text-sm text-primary-foreground/80">
+              <li><Link href="/disclaimer" className="hover:text-background transition-colors">Disclaimer</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-background transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms-of-service" className="hover:text-background transition-colors">Terms of Service</Link></li>
+            </ul>
+          </div>
         </div>
 
         <div className="pt-8 border-t border-primary-foreground/10 text-xs text-primary-foreground/50 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="max-w-2xl">
-            <strong>Disclaimer:</strong> According to the rules of the Bar Council of India, advocates are prohibited from soliciting work or advertising. This website is for informational purposes only and does not constitute legal advice or solicitation.
+            <strong><Link href="/disclaimer" className="hover:text-background transition-colors">Disclaimer:</Link></strong> According to the rules of the Bar Council of India, advocates are prohibited from soliciting work or advertising. This website is for informational purposes only and does not constitute legal advice or solicitation.
           </p>
           <p>© {new Date().getFullYear()} Anil Shukla. All rights reserved.</p>
         </div>
